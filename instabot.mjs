@@ -12,10 +12,12 @@ dotenv.config();
 
 async function instaBot() {
     consoleMessage('log', 'Starting InstaBot')
-    console.log(process.env.USERNAME)
-    console.log(process.env.PASSWORD)
-    const hashtagsArray = process.env.HASHTAGS ? process.env.HASHTAGS.replace(/"|'|\[|\]| /ig,'').split(',') : hashtagCategories.standard
-    console.log(hashtagsArray)
+    const hashtagsArray = process.env.HASHTAGS
+        ? process.env.HASHTAGS.replace(/"|'|\[|\]| /ig,'').split(',')
+        : hashtagCategories.standard
+
+    const { prelogin, login, publication } = selectors;
+
     /*
     // set up Puppeteer
     const browser = await puppeteer.launch({
@@ -32,12 +34,12 @@ async function instaBot() {
     // Load Instagram
     await page.goto('https://www.instagram.com');
     await page.waitFor(2500);
-    await page.click(selectors.home_to_login_button);
+    await page.click(prelogin.toLoginBtn);
     await page.waitFor(2500);
     consoleMessage('log', 'Instagram Home loaded.')
 
     // Login
-    await page.click(selectors.username_field);
+    await page.click(login.usernameInput);
     try {
         await page.keyboard.type(process.env.USERNAME);
     } catch(e){
@@ -45,7 +47,7 @@ async function instaBot() {
         consoleMessage('error', 'NO .env USERNAME variable detected')
     }
     
-    await page.click(selectors.password_field);
+    await page.click(login.passInput);
     try {
         await page.keyboard.type(process.env.PASSWORD);
     } catch(e){
@@ -54,7 +56,7 @@ async function instaBot() {
     }
    
 
-    await page.click(selectors.login_button);
+    await page.click(login.submitBtn);
     consoleMessage('log', 'Login clicked.')
     await page.waitForNavigation();
     consoleMessage('log', 'Awaiting for validation...')
@@ -87,17 +89,17 @@ async function instaBot() {
                 if (br) continue;
 
                 // Get post info
-                let hasEmptyHeart = await page.$(selectors.post_heart_grey);
+                let hasEmptyHeart = await page.$(publication.greyHeartIcon);
 
                 let username = await page.evaluate(x => {
                     let element = document.querySelector(x);
                     return Promise.resolve(element ? element.innerHTML : '');
-                }, selectors.post_username);
+                }, publication.username);
 
                 let followStatus = await page.evaluate(x => {
                     let element = document.querySelector(x);
                     return Promise.resolve(element ? element.innerHTML : '');
-                }, selectors.post_follow_link);
+                }, publication.followLink);
 
                 let hasLikeButton = await page.evaluate(() => {
                     let element = document.querySelector('span.fr66n > button');
@@ -105,7 +107,7 @@ async function instaBot() {
                 })
 
                 let hasCloseButton = await page.evaluate(() => {
-                    let element = document.querySelector('button.ckWGn');
+                    let element = document.querySelector(publication.closeBtn);
                     console.log(element)
                     return Promise.resolve(element ? element.innerHTML : undefined);
                 })
@@ -114,7 +116,7 @@ async function instaBot() {
 
                 // Decide to like post
                 if (hasEmptyHeart && hasLikeButton && Math.random() < 0.5) {
-                    await page.click(selectors.post_like_button);
+                    await page.click(publication.likeBtn);
                     let blocked = await page.evaluate(() => {
                         let element = document.querySelector('._2dDPU');
                         console.log(element)
@@ -131,7 +133,7 @@ async function instaBot() {
 
                 // Decide to follow user
                 if (followStatus === 'Follow' && Math.random() < 0.25) {
-                    await page.click(selectors.post_follow_link).then(() => {
+                    await page.click(publication.follow_link).then(() => {
                         consoleMessage('log', '---> follow for ' + username)
                         return page.waitFor(15000 + Math.floor(Math.random() * 5000));
                     }).catch(() => {
