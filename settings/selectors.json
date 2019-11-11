@@ -1,0 +1,12 @@
+{
+  "home_to_login_button": ".izU2O > a",
+  "username_field": "input[type=\"text\"]",
+  "password_field": "input[type=\"password\"]",
+  "login_button": ".L3NKy",
+  "post_heart_grey": "span.glyphsSpriteHeart__outline__24__grey_9",
+  "post_username": "div.e1e1d > h2 > a",
+  "post_follow_link": "div.bY2yH > button",
+  "post_like_button": "span.fr66n > button",
+  "post_follow_button": "span.oW_lN._1OSdk > button",
+  "post_close_button": "button.ckWGn"
+}

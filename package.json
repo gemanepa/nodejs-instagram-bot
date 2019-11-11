@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-instagram-bot",
+  "author": "gemanepa",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Instagram bot made with Node.js and Puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "start": "FOLLOW=true LIKE=true node --experimental-modules instabot.mjs",
+    "start --not-follow": "FOLLOW=false LIKE=true node --experimental-modules instabot.mjs",
+    "start --not-like": "FOLLOW=true LIKE=false node --experimental-modules instabot.mjs",
+    "monitor:start": "FOLLOW=true LIKE=true pm2 start --experimental-modules instabot.mjs && pm2 monit instabot",
+    "monitor:start --not-follow": "FOLLOW=false LIKE=true pm2 start --experimental-modules instabot.mjs && pm2 monit instabot",
+    "monitor:start --not-like": "FOLLOW=true LIKE=false pm2 start --experimental-modules instabot.mjs && pm2 monit instabot",
+    "monitor:stop": "pm2 stop instabot"
+  },
+  "dependencies": {
+    "dotenv": "latest",
+    "puppeteer": "latest"
+  }
+}
