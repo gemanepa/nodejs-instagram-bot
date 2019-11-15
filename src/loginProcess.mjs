@@ -12,7 +12,7 @@ export default async function loginProcess(page, selectors) {
         await page.waitFor(2500);
         await page.click(prelogin.toLoginBtn);
         await page.waitFor(2500);
-        consoleMessage('log', 'Instagram Home loaded.')
+        consoleMessage('info', 'Instagram Home loaded.')
     
         // Login
         await page.click(login.usernameInput);
@@ -33,9 +33,9 @@ export default async function loginProcess(page, selectors) {
        
     
         await page.click(login.submitBtn);
-        consoleMessage('log', 'Login clicked.')
+        consoleMessage('info', 'Login clicked.')
         await page.waitForNavigation();
-        consoleMessage('log', 'Awaiting for validation...')
+        consoleMessage('info', 'Awaiting for validation...')
     } catch(error){
         console.error(error)
         consoleMessage('error', 'ERROR! Restarting...')

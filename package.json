@@ -15,6 +15,7 @@
     "monitor:stop": "pm2 stop instabot"
   },
   "dependencies": {
+    "chalk": "latest",
     "dotenv": "latest",
     "puppeteer": "latest"
   }
