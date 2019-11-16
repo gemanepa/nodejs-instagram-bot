@@ -10,6 +10,7 @@ export default function consoleMessage(type, message, linebreak){
   const logColor = {
     error: 'redBright',
     info: 'cyanBright',
+    viinfo: 'blueBright',
     header: 'yellowBright',
     intro: 'bgBlue'
   }
