@@ -2,42 +2,34 @@ import getPostInfo from './getPostInfo';
 import postLiker from './postLiker';
 import userFollower from './userFollower';
 import postCloser from './postCloser';
+import selectPost from './selectPost';
 import consoleMessage from '../utils/consoleMessage';
 
-export default async function postsHandler(page, hashtags, selectors) {
-    const { publication } = selectors;
-
+export default async function postsHandler(page, hashtags, selector) {
     try {
         // Search for hashtags
         for (let hl = 0; hl < hashtags.length; hl++) {
-            await page.goto('https://www.instagram.com/explore/tags/' + hashtags[hl] + '/?hl=en');
-            consoleMessage('info', '\n===> hashtag search: ' + hashtags[hl])
+            await page.goto(`https://www.instagram.com/explore/tags/${hashtags[hl]}/?hl=en`);
+            consoleMessage('info', `\n===> hashtag search: ${hashtags[hl]}`)
+            
             // Loop through the latest 9 posts
-            for (let r = 1; r < 4; r++) {
-                for (let c = 1; c < 4; c++) {
-                    //Try to select post, wait, if successful continue
-                    let br = false;
-                    await page.click('section > main > article > div:nth-child(3) > div > div:nth-child(' + r + ') > div:nth-child(' + c +') > a').catch(() => {
-                        br = true;
-                    });
-                    await page.waitFor(5250 + Math.floor(Math.random() * 250));
+            for (let parentDiv = 1; parentDiv < 4; parentDiv++) {
+                for (let childDiv = 1; childDiv < 4; childDiv++) {
+                    const postSelected = await selectPost(page, parentDiv, childDiv);
+                    if (!postSelected) continue;
 
-                    // Get post info
-                    const postInfo = await getPostInfo(page, publication);
+                    const postInfo = await getPostInfo(page, selector);
                     const { username, hasLikeButton, hasCloseButton, hasEmptyHeart, followStatus} = postInfo
 
-                    consoleMessage('info', '---> Evaluating post from ' + username)
-
-                    await postLiker(page, publication, username, hasEmptyHeart, hasLikeButton)
-                    await userFollower(page, publication, username, followStatus)
+                    await postLiker(page, selector, username, hasEmptyHeart, hasLikeButton)
+                    await userFollower(page, selector, username, followStatus)
                     await postCloser(page, hasCloseButton)
                 }
             }
         }
-
       } catch(error){
             console.error(error)
-            consoleMessage('error', 'ERROR! Restarting...')
+            consoleMessage('error', 'postsHandler failure')
             process.exit()
         }
 }

@@ -1,25 +1,18 @@
 import dotenv from 'dotenv';
-import puppeteer from 'puppeteer';
+import { launchPuppeteer, finishApp } from './src/appLifecycle.mjs';
 import setHashtags from './src/setHashtags.mjs';
-import loginProcess from './src/loginProcess.mjs'
-import postsHandler from './src/postsHandler.mjs'
+import loginProcess from './src/loginProcess.mjs';
+import postsHandler from './src/postsHandler.mjs';
 import selectors from './settings/selectors.json';
-import consoleMessage from './utils/consoleMessage.mjs';
+import headless from './settings/headless.json';
 
 dotenv.config();
 
 async function instaBot() {
-    consoleMessage('info', 'Starting InstaBot')
-    const hashtags = setHashtags();
-
-    // set up Puppeteer
-    const browser = await puppeteer.launch({headless: false});
-    const page = await browser.newPage();
-
+    const { browser, page } = await launchPuppeteer(headless);
     await loginProcess(page, selectors);
-    await postsHandler(page, hashtags, selectors)
-
-    browser.close();
+    await postsHandler(page, setHashtags(), selectors.publication)
+    await finishApp(browser);
 };
 
 instaBot()
