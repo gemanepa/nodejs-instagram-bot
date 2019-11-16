@@ -1,12 +1,10 @@
 # NodeJS + Puppeteer Instagram Bot
-A simple Node.js Instagram Bot using [Puppeteer.js](https://github.com/GoogleChrome/puppeteer)
-
 This Instagram Bot will authenticate and login into your Instagram account. By providing a number of hashtags it creates engagement by liking posts and following users.
 If account can't give likes or follows due to suspicious activity (in other words, account was temporaly blocked), bot deactivates for 24hs
 
 ## Software PreRequisites
 * NodeJS v12 or higher https://nodejs.org/es/download/current/
-* pm2 http://pm2.keymetrics.io/ (only if you want the app to automatically restart in case of error)
+* pm2 http://pm2.keymetrics.io/ (only if you want the app to automatically restart in case of unexpected crashing)
 
 ## Config
 Create a .env file with the USERNAME and PASSWORD of the account. If you don't like the standard hashtags in *settings/hashtags.json* you can also add an array of hastags
@@ -14,7 +12,7 @@ Create a .env file with the USERNAME and PASSWORD of the account. If you don't l
 
 ## Scripts
 * `yarn` or `npm install` installs the required modules.
-* `yarn start` or `npm run start` runs the app without automatic restart in case of error
+* `yarn start` or `npm run start` runs the bot without automatic restart in case of unexpected crashing
 * `yarn start --not-follow` or `npm run start --not-follow` runs the app without automatic restart and without the follow functionality
 * `yarn start --not-like` or `npm run start --not-like` runs the app without automatic restart and without the like functionality
 * `yarn monitor:start` or `npm run monitor:start` runs the app with automatic restart in case of error
