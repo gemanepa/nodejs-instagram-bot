@@ -10,7 +10,7 @@ export default async function getPostInfo(page, selector) {
     })
 
     let hasCloseButton = await page.evaluate(() => {
-        let element = document.querySelector(selector.closeBtn);
+        let element = document.querySelector('button.ckWGn');
         console.log(element)
         return Promise.resolve(element ? element.innerHTML : undefined);
     })
