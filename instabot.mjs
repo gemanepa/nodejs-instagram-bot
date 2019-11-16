@@ -31,19 +31,32 @@ async function instaBot() {
 
     await loginProcess(page, selectors);
 
+
+    try {
+        await page.goto(`https://www.instagram.com/explore/tags/reactjs/`);
+    } catch { consoleMessage('error', `Failure with page.goto('https://www.instagram.com/explore/tags/' + ${hashtag} `) }
+    //consoleMessage('info', '\n===> hashtag search: ' + hashtag)
+        // Loop through the latest 9 posts
+
+
+        try {
+            const divsCounts = await page.$$eval('main > .KC1QD > div:nth-child(2) > div', divs => divs.innerHTML);
+            console.log(divsCounts)
+        } catch { console.log('divs 1 did not work')}
+        console.log('=====================================')
+        try {
+            const divsCounts = await page.$$eval('main > .KC1QD > div:nth-child(3) > div', divs => divs.innerHTML);
+            console.log(divsCounts)
+        } catch { console.log('divs 2 did not work')}
+        console.log('=====================================')
+/*
    try {
     // Loop through shuffled hashtags
     let hashtags = shuffle(hashtagsArray);
     consoleMessage('info', 'Hashtags shuffle activated.')
 
     await hashtags.forEach(async function (hashtag) {
-        try {
-            await page.goto(`https://www.instagram.com/explore/tags/${hashtag}/?hl=en`);
-        } catch { consoleMessage('error', `Failure with page.goto('https://www.instagram.com/explore/tags/' + ${hashtag} `) }
-        consoleMessage('info', '\n===> hashtag search: ' + hashtag)
-            // Loop through the latest 9 posts
-            let elem = await page.$eval('main > article > div:nth-child(2) > div', el => el.innerHTML)
-            console.log(elem)
+            
     for (let r = 1; r < 4; r++) {
         for (let c = 1; c < 4; c++) {
             //Try to select post, wait, if successful continue
@@ -54,7 +67,7 @@ async function instaBot() {
             });
             await page.waitFor(5250 + Math.floor(Math.random() * 250));
             if (br) continue;
-
+            
             // Get post info
             let { username, hasLikeButton, hasCloseButton, hasEmptyHeart, followStatus} = await getPostInfo(page, selector)
 
@@ -63,6 +76,7 @@ async function instaBot() {
             await postLiker(page, selector, hasEmptyHeart, hasLikeButton)
             await userFollower(page, selector, username, followStatus)
             await postCloser(page, hasCloseButton)
+            
         }
     }
         return true
@@ -74,7 +88,7 @@ async function instaBot() {
         console.error(error)
         consoleMessage('error', 'ERROR! Restarting...')
         process.exit()
-    }
+    }*/
 };
 
 instaBot()
