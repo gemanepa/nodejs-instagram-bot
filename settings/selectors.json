@@ -1,0 +1,17 @@
+{
+  "prelogin": {
+    "toLoginBtn": ".izU2O > a"
+  },
+  "login": {
+    "usernameInput": "input[type=\"text\"]",
+    "passInput": "input[type=\"password\"]",
+    "submitBtn": ".L3NKy"
+  },
+  "publication": {
+    "greyHeartIcon": "span.glyphsSpriteHeart__outline__24__grey_9",
+    "username": "div.e1e1d > h2 > a",
+    "followLink": "div.bY2yH > button",
+    "likeBtn": "span.fr66n > button",
+    "closeBtn": "button.ckWGn"
+  }
+}
