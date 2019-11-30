@@ -1,7 +1,7 @@
 
 # NodeJS + Puppeteer Instagram Bot
 ![](https://i.imgur.com/1ug6S0N.jpg)
-This Instagram Bot will authenticate and login into your Instagram account, then using a number of hashtags it will create engagement by liking posts and following users.
+Instagram Bot that logins into an Instagram account, then using a number of hashtags creates engagement by liking posts and following users.
 
 If account can't give likes or follows due to suspicious activity (in other words, account was temporaly blocked), bot deactivates for 24hs
 
