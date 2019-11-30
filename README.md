@@ -25,21 +25,21 @@ Create a .env file with the USERNAME and PASSWORD of the account. If you don't l
 
 ## Scripts
 
-*  `yarn` or `npm install` installs the required modules.
+*  `npm install` installs the required modules.
 
-*  `yarn start` or `npm run start` runs the bot without automatic restart in case of unexpected crashing
+*  `npm run start` runs the bot without automatic restart in case of unexpected crashing
 
-*  `yarn start --not-follow` or `npm run start --not-follow` runs the app without automatic restart and without the follow functionality
+*  `npm run start:nofollow` runs the app without automatic restart and without the follow functionality
 
-*  `yarn start --not-like` or `npm run start --not-like` runs the app without automatic restart and without the like functionality
+*  `npm run start:nolike` runs the app without automatic restart and without the like functionality
 
-*  `yarn monitor:start` or `npm run monitor:start` runs the app with automatic restart in case of error
+*  `npm run monitor:start` runs the app with automatic restart in case of error
 
-*  `yarn monitor:stop` or `npm run monitor:stop` stops pm2 monitoring
+*  `npm run monitor:stop` stops pm2 monitoring
 
-*  `yarn monitor:start --not-follow` or `npm run monitor:start --not-follow` runs the app with automatic restart and without the follow functionality
+*  `npm run monitor:start:nofollow` runs the app with automatic restart and without the follow functionality
 
-*  `yarn monitor:start --not-like` or `npm run monitor:start --not-like` runs the app with automatic restart and without the like functionality
+*  `npm run monitor:start:nolike` runs the app with automatic restart and without the like functionality
 
   
 

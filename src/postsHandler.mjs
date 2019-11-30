@@ -19,8 +19,8 @@ export default async function postsHandler(page) {
                 const postInfo = await getPostInfo(page, selector, parentDiv, childDiv);
                 const { username, hasLikeButton, hasCloseButton, hasEmptyHeart, followStatus} = postInfo
 
-                await postLiker(page, selector, username, hasEmptyHeart, hasLikeButton)
-                await userFollower(page, username, followStatus)
+                process.env.LIKE == 'true' && await postLiker(page, selector, username, hasEmptyHeart, hasLikeButton)
+                process.env.FOLLOW == 'true' && await userFollower(page, username, followStatus)
                 await postCloser(page, hasCloseButton)
             }
         }
