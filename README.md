@@ -5,7 +5,7 @@ Instagram Bot that logins into an Instagram account, then using a number of hash
 
 If account can't give likes or follows due to suspicious activity (in other words, account was temporaly blocked), bot deactivates for 24hs
 
-  
+[Youtube Video](https://youtu.be/lDz2PtfpEmU)
 
 ## Software PreRequisites
 
