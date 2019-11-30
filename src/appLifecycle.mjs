@@ -7,7 +7,10 @@ export async function launchPuppeteer(headless) {
     consoleMessage('intro', '--> github.com/gemanepa/nodejs-instagram-bot')
     consoleMessage('intro', 'Starting...')
     try {        
-        const browser = await puppeteer.launch(headless);
+        const browser = await puppeteer.launch({
+            headless,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          });
         const page = await browser.newPage();
         return { browser, page }
     } catch(error) {
